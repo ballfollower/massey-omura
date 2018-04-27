@@ -1,19 +1,21 @@
-var bigInt = require("big-integer");
-
-function nextProbablePrime(number){
-    if(number.isEven())
-        number=number.prev();
-        
-    do{
-        number=number.add(2);
-    }
-    while(!number.isProbablePrime());
-    
-    return number;
-}
-
-$(function(){
-    $('#drawingButton').click(function(){
-        $("#p").val(nextProbablePrime(bigInt(2).pow($('#pBits').val()-1)));
+$(function () {
+    $('#drawingButton').on('click', function () {
+        $("#p").val(randomProbablePrime($('#pBits').val()).toString(10));
     });
 });
+
+function randomProbablePrime(len) {
+    var a;
+    var lowerBound=bigInt(2).pow(len-1);
+    var upperBound=bigInt(2).pow(len).prev();
+
+    do {
+        a=bigInt.randBetween(lowerBound, upperBound);
+    } while (!a.isProbablePrime());
+
+    return a;
+}
+
+function drawEncryptionKey(){
+    
+}
