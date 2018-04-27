@@ -99,3 +99,13 @@ function encode(text, chars_per_block, bits_per_char) {
 
     return output;
 }
+
+function powerModArray(numbers, exponent, modulus){
+    var result=[];
+    
+    for (var num in numbers) {
+        result.push(num.modPow(exponent, modulus));
+    }
+    
+    return result;
+}
