@@ -21,7 +21,20 @@ $(function () {
     });
 
     $('#input').on('change', function () {
-        $('#inputEncoded').val(encode(this.value, charsPerBlock, BITS_PER_CHAR));
+        var plaintext=encode(this.value, charsPerBlock, BITS_PER_CHAR);
+        $('#inputEncoded').val(plaintext);
+        
+        var ciphertextA=powerModArray(plaintext,a,p);
+        $('#aEncrypted').val(ciphertextA);
+        
+        var ciphertextAB=powerModArray(ciphertextA,b,p);
+        $('#bEncrypted').val(ciphertextAB);
+        
+        var ciphertextABA=powerModArray(ciphertextAB,aInv,p);
+        $('#aDecrypted').val(ciphertextABA);
+        
+        var ciphertextABAB=powerModArray(ciphertextABA,bInv,p);
+        $('#outputEncoded').val(ciphertextABAB);
     });
 });
 
@@ -100,11 +113,15 @@ function encode(text, chars_per_block, bits_per_char) {
     return output;
 }
 
+function decode(){
+    
+}
+
 function powerModArray(numbers, exponent, modulus){
     var result=[];
     
-    for (var num in numbers) {
-        result.push(num.modPow(exponent, modulus));
+    for (var i=0;i< numbers.length;i++) {
+        result.push(numbers[i].modPow(exponent, modulus));
     }
     
     return result;
