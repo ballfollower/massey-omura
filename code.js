@@ -21,20 +21,23 @@ $(function () {
     });
 
     $('#input').on('change', function () {
-        var plaintext=encode(this.value, charsPerBlock, BITS_PER_CHAR);
+        var plaintext = encode(this.value, charsPerBlock, BITS_PER_CHAR);
         $('#inputEncoded').val(plaintext);
-        
-        var ciphertextA=powerModArray(plaintext,a,p);
+
+        var ciphertextA = powerModArray(plaintext, a, p);
         $('#aEncrypted').val(ciphertextA);
-        
-        var ciphertextAB=powerModArray(ciphertextA,b,p);
+
+        var ciphertextAB = powerModArray(ciphertextA, b, p);
         $('#bEncrypted').val(ciphertextAB);
-        
-        var ciphertextABA=powerModArray(ciphertextAB,aInv,p);
+
+        var ciphertextABA = powerModArray(ciphertextAB, aInv, p);
         $('#aDecrypted').val(ciphertextABA);
-        
-        var ciphertextABAB=powerModArray(ciphertextABA,bInv,p);
+
+        var ciphertextABAB = powerModArray(ciphertextABA, bInv, p);
         $('#outputEncoded').val(ciphertextABAB);
+
+        var output = decode(ciphertextABAB, charsPerBlock, BITS_PER_CHAR);
+        $('#output').val(output);
     });
 });
 
@@ -66,6 +69,16 @@ function splitIntoBlocks(text, chars_per_block) {
     return text.match(new RegExp('.{1,' + chars_per_block + '}', 'g')).join('\u2605');
 }
 
+function charTo8bitString(char) {
+    var result = char.charCodeAt(0).toString(2);
+
+    return "00000000".substr(result.length) + result;
+}
+
+function padTo8bitString(bitstring) {
+    return "00000000".substr(bitstring.length) + bitstring;
+}
+
 /**
  * Encodes character blocks as numbers. The last character/byte informs how
  * many random characters have been padded. The illustration follows
@@ -90,7 +103,7 @@ function encode(text, chars_per_block, bits_per_char) {
         bitString = "";
 
         for (var j = 0; j < chars_per_block; j++) {
-            bitString += text[currentPosition++].charCodeAt(0).toString(2);
+            bitString += charTo8bitString(text[currentPosition++]);
         }
 
         output.push(bigInt(bitString, 2));
@@ -101,28 +114,53 @@ function encode(text, chars_per_block, bits_per_char) {
 
     bitString = "";
     while (currentPosition < text.length) {
-        bitString += text[currentPosition++].charCodeAt(0).toString(2);
+        bitString += charTo8bitString(text[currentPosition++]);
     }
     for (var i = 0; i < CHARACTERS_TO_PAD; i++) {
-        bitString += bigInt.randBetween(0, 255).toString(2);
+        var randomCharBitstring = bigInt.randBetween(0, 255).toString(2);
+        
+        bitString += padTo8bitString(randomCharBitstring);
     }
-    bitString += CHARACTERS_TO_PAD.toString(2);
+    bitString += padTo8bitString(CHARACTERS_TO_PAD.toString(2));
 
     output.push(bigInt(bitString, 2));
 
     return output;
 }
 
-function decode(){
-    
+function decode(numbers, chars_per_block, bits_per_char) {
+    var output = "";
+
+    for (var i = 0; i < numbers.length - 1; i++) {
+        const NUMBER_BITSTRING = numbers[i].toString(2);
+
+        for (var j = 0; j < chars_per_block; j++) {
+            const CHAR_BITSTRING = NUMBER_BITSTRING.slice(j * bits_per_char,
+                    (j + 1) * bits_per_char);
+            output += String.fromCharCode(parseInt(CHAR_BITSTRING, 2));
+        }
+    }
+
+    const LAST_NUMBER_BITSTRING = numbers[numbers.length - 1].toString(2);
+    const CHARACTERS_PADDED = parseInt(LAST_NUMBER_BITSTRING.substring(
+            LAST_NUMBER_BITSTRING.length - bits_per_char), 2);
+
+
+    for (var i = 0; i < chars_per_block - 1 - CHARACTERS_PADDED; i++) {
+        const CHAR_BITSTRING = LAST_NUMBER_BITSTRING.slice(i * bits_per_char,
+                (i + 1) * bits_per_char);
+        output += String.fromCharCode(parseInt(CHAR_BITSTRING, 2));
+    }
+
+    return output;
 }
 
-function powerModArray(numbers, exponent, modulus){
-    var result=[];
-    
-    for (var i=0;i< numbers.length;i++) {
+function powerModArray(numbers, exponent, modulus) {
+    var result = [];
+
+    for (var i = 0; i < numbers.length; i++) {
         result.push(numbers[i].modPow(exponent, modulus));
     }
-    
+
     return result;
 }
