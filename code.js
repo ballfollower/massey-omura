@@ -75,8 +75,12 @@ function charTo8bitString(char) {
     return "00000000".substr(result.length) + result;
 }
 
-function padTo8bitString(bitstring) {
-    return "00000000".substr(bitstring.length) + bitstring;
+function padBitString(bitstring, length) {
+    while (bitstring.length < length) {
+        bitstring = "0" + bitstring;
+    }
+    
+    return bitstring;
 }
 
 /**
@@ -118,10 +122,10 @@ function encode(text, chars_per_block, bits_per_char) {
     }
     for (var i = 0; i < CHARACTERS_TO_PAD; i++) {
         var randomCharBitstring = bigInt.randBetween(0, 255).toString(2);
-        
-        bitString += padTo8bitString(randomCharBitstring);
+
+        bitString += padBitString(randomCharBitstring, bits_per_char);
     }
-    bitString += padTo8bitString(CHARACTERS_TO_PAD.toString(2));
+    bitString += padBitString(CHARACTERS_TO_PAD.toString(2), bits_per_char);
 
     output.push(bigInt(bitString, 2));
 
@@ -132,7 +136,8 @@ function decode(numbers, chars_per_block, bits_per_char) {
     var output = "";
 
     for (var i = 0; i < numbers.length - 1; i++) {
-        const NUMBER_BITSTRING = numbers[i].toString(2);
+        const NUMBER_BITSTRING = padBitString(numbers[i].toString(2),
+        chars_per_block*bits_per_char);
 
         for (var j = 0; j < chars_per_block; j++) {
             const CHAR_BITSTRING = NUMBER_BITSTRING.slice(j * bits_per_char,
@@ -141,7 +146,8 @@ function decode(numbers, chars_per_block, bits_per_char) {
         }
     }
 
-    const LAST_NUMBER_BITSTRING = numbers[numbers.length - 1].toString(2);
+    const LAST_NUMBER_BITSTRING = padBitString(
+            numbers[numbers.length - 1].toString(2),chars_per_block*bits_per_char);
     const CHARACTERS_PADDED = parseInt(LAST_NUMBER_BITSTRING.substring(
             LAST_NUMBER_BITSTRING.length - bits_per_char), 2);
 
