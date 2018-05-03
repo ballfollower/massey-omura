@@ -1,17 +1,17 @@
 function cbc(plaintext){
     var iv=bigInt.randBetween(1,p.prev());
     
-//    var ciphertextA = powerModArray(plaintext, a, p);
-  //  $('#aEncrypted').val(ciphertextA);
+    var ciphertextA = ecbEncrypt(plaintext, a, p, iv);
+    $('#aEncrypted').val(ciphertextA);
 
-    //var ciphertextAB = powerModArray(ciphertextA, b, p);
-//    $('#bEncrypted').val(ciphertextAB);
+    var ciphertextAB = ecbEncrypt(ciphertextA, b, p, iv);
+    $('#bEncrypted').val(ciphertextAB);
 
-//    var ciphertextABA = powerModArray(ciphertextAB, aInv, p);
-//    $('#aDecrypted').val(ciphertextABA);
+    var ciphertextABA = ecbEncrypt(ciphertextAB, aInv, p, iv);
+    $('#aDecrypted').val(ciphertextABA);
 
-//    var ciphertextABAB = powerModArray(ciphertextABA, bInv, p);
-//    $('#outputEncoded').val(ciphertextABAB);
+    var ciphertextABAB = ecbEncrypt(ciphertextABA, bInv, p, iv);
+    $('#outputEncoded').val(ciphertextABAB);
 
     return ciphertextABAB;
 }

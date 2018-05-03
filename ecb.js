@@ -1,20 +1,20 @@
 function ecb(plaintext){
-        var ciphertextA = powerModArray(plaintext, a, p);
+        var ciphertextA = ecbTransform(plaintext, a, p);
         $('#aEncrypted').val(ciphertextA);
 
-        var ciphertextAB = powerModArray(ciphertextA, b, p);
+        var ciphertextAB = ecbTransform(ciphertextA, b, p);
         $('#bEncrypted').val(ciphertextAB);
 
-        var ciphertextABA = powerModArray(ciphertextAB, aInv, p);
+        var ciphertextABA = ecbTransform(ciphertextAB, aInv, p);
         $('#aDecrypted').val(ciphertextABA);
 
-        var ciphertextABAB = powerModArray(ciphertextABA, bInv, p);
+        var ciphertextABAB = ecbTransform(ciphertextABA, bInv, p);
     $('#outputEncoded').val(ciphertextABAB);
 
     return ciphertextABAB;
 }
 
-function powerModArray(numbers, exponent, modulus) {
+function ecbTransform(numbers, exponent, modulus) {
     var result = [];
 
     for (var i = 0; i < numbers.length; i++) {

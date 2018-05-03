@@ -24,7 +24,17 @@ $(function () {
         var plaintext = encode(this.value, charsPerBlock, BITS_PER_CHAR);
         $('#inputEncoded').val(plaintext);
 
-	var ciphertextABAB=ecb(plaintext);
+	var ciphertextABAB;
+	
+	if($("#ecb").prop("checked"))
+	    ciphertextABAB=ecb(plaintext);
+	else if($("#cbc").prop("checked"))
+	    ciphertextABAB=cbc(plaintext);
+	else if($("#ofb").prop("checked"))
+	    ciphertextABAB=null;
+	else
+	    ciphertextABAB=null;
+	
 
         var output = decode(ciphertextABAB, charsPerBlock, BITS_PER_CHAR);
         $('#output').val(output);
