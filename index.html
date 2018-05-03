@@ -1,79 +1,83 @@
 <html>
-    <head>
-        <link rel="stylesheet" type="text/css" href="style.css" />
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <!--<script src="https://peterolson.github.com/BigInteger.js/BigInteger.min.js"></script>-->
-        <script src="BigInteger.min.js"></script>
-        <script src="code.js"></script>
-    </head>
-    <body>
+  <head>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!--<script src="https://peterolson.github.com/BigInteger.js/BigInteger.min.js"></script>-->
+    <script src="BigInteger.min.js"></script>
+    <script src="code.js"></script>
+  </head>
+  <body>
 
-        <table>
+    <table>
 
-            <tr>
-                <td></td>
-                <td>
-                    <input type="text" id="p" /><br />
-                    <button id="drawingButton">Draw</button>
-                    <input type="text" id="pBits" value="64" style="width: 45px;" />-bit one
-                </td>
-                <td></td>
-            </tr>
+      <tr>
+        <td></td>
+        <td>
+          <input type="text" id="p" /><br />
+          <button id="drawingButton">Draw</button>
+          <input type="text" id="pBits" value="64" style="width: 45px;" />-bit one
+        </td>
+        <td></td>
+      </tr>
 
-            <tr>
-                <td>
-                    <input type="text" id="a" />
-                </td>
-                <td></td>
-                <td>
-                    <input type="text" id="b" />
-                </td>
-            </tr>
+      <tr>
+        <td>
+          <input type="text" id="a" />
+        </td>
+        <td></td>
+        <td>
+          <input type="text" id="b" />
+        </td>
+      </tr>
 
-            <tr>
-                <td>
-                    <input type="text" id="aInv" />
-                </td>
-                <td></td>
-                <td>
-                    <input type="text" id="bInv" />
-                </td>
-            </tr>
+      <tr>
+        <td>
+          <input type="text" id="aInv" />
+        </td>
+        <td></td>
+        <td>
+          <input type="text" id="bInv" />
+        </td>
+      </tr>
 
-            <tr>
-                <td colspan="2">
-                    <input type="text" id="input" value="Grzegorz Klosinski" /><br />
-                    <input type="text" id="inputEncoded" /><br />
+      <tr>
+        <td colspan="2">
+          <input type="text" id="input" value="Grzegorz Klosinski" /><br />
+          <input type="text" id="inputEncoded" /><br />
 
-                    <input type="text" id="aEncrypted" />
-                </td>
-                <td></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td colspan="2">
-                    <input type="text" id="bEncrypted" />
-                </td>
-            </tr>
+          <input type="text" id="aEncrypted" />
+        </td>
+        <td></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td colspan="2">
+          <input type="text" id="bEncrypted" />
+        </td>
+      </tr>
 
-            <tr>
-                <td colspan="2">
-                    <input type="text" id="aDecrypted" />
-                </td>
-                <td></td>
-            </tr>
+      <tr>
+        <td colspan="2">
+          <input type="text" id="aDecrypted" />
+        </td>
+        <td></td>
+      </tr>
 
-            <tr>
-                <td></td>
-                <td colspan="2">
-                    <input type="text" id="outputEncoded" /><br />
-                    <input type="text" id="output" />
-                </td>
-            </tr>
+      <tr>
+        <td></td>
+        <td colspan="2">
+          <input type="text" id="outputEncoded" /><br />
+          <input type="text" id="output" />
+        </td>
+      </tr>
 
-        </table>
-	<fieldset>
-	  <input type="radio" name="mode" id="ecb" /> ECB
-	  </fieldset>
-    </body>
+    </table>
+    <fieldset>
+      <legend>Mode</legend>
+      <input type="radio" name="mode" id="ecb" checked="true" /> ECB<br />
+      <input type="radio" name="mode" id="cbc" /> CBC<br />
+      <input type="radio" name="mode" id="ofb" /> OFB<br />
+      <input type="radio" name="mode" id="cnt" /> CNT
+    </fieldset>
+  </body>
 </html>

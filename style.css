@@ -9,6 +9,6 @@ td{
     width: 33%;
 }
 
-input{
+input[type='text']{
     width: 100%;
 }
