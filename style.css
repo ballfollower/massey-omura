@@ -5,8 +5,19 @@ table{
 }
 
 td{
-    text-align: center;
     width: 33%;
+}
+
+.labeled{
+    width:auto;
+}
+
+.centeredCell{
+    text-align: center;
+}
+
+.label{
+    width: 10px;
 }
 
 input[type='text']{
