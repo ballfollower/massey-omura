@@ -1,16 +1,28 @@
 function cbc(plaintext){
     var iv=bigInt.randBetween(1,p.prev());
     
-    var ciphertextA = cbcEncrypt(plaintext, a, p, iv);
+    var ciphertextA = 
+	ecbTransform(plaintext, a, p);
+//	cbcEncrypt(plaintext, a, p, iv);
+//	cbcDecrypt(plaintext, a, p, iv);
     $('#aEncrypted').val(ciphertextA);
 
-    var ciphertextAB = ecbTransform(ciphertextA, b, p);
+    var ciphertextAB = 
+//	ecbTransform(ciphertextA, b, p);
+	cbcEncrypt(ciphertextA, b, p, iv);
+//	cbcDecrypt(ciphertextA, b, p, iv);
     $('#bEncrypted').val(ciphertextAB);
 
-    var ciphertextABA = cbcDecrypt(ciphertextAB, aInv, p, iv);
+    var ciphertextABA =
+//	ecbTransform(ciphertextAB, aInv, p);
+//	cbcEncrypt(ciphertextAB, aInv, p, iv);
+	cbcDecrypt(ciphertextAB, aInv, p, iv);
     $('#aDecrypted').val(ciphertextABA);
 
-    var ciphertextABAB = ecbTransform(ciphertextABA, bInv, p);
+    var ciphertextABAB = 
+	ecbTransform(ciphertextABA, bInv, p);
+//	cbcEncrypt(ciphertextABA, bInv, p, iv);
+//	cbcDecrypt(ciphertextABA, bInv, p, iv);
     $('#outputEncoded').val(ciphertextABAB);
 
     return ciphertextABAB;
