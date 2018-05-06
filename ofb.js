@@ -1,4 +1,6 @@
-function ofb(plaintext) {
+function ofb(plaintext, a, aInv, b, bInv, p) {
+    var iv = bigInt.randBetween(1, p.prev());
+
     var ciphertextA = ofbEncrypt(plaintext, a, p, iv);
     $('#aEncrypted').val(ciphertextA);
 

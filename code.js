@@ -28,13 +28,8 @@ $(function () {
 	
 	if($("#ecb").prop("checked"))
 	    ciphertextABAB=ecb(plaintext);
-	else if($("#cbc").prop("checked"))
-	    ciphertextABAB=cbc(plaintext);
-	else if($("#ofb").prop("checked"))
-	    ciphertextABAB=null;
-	else
-	    ciphertextABAB=null;
-	
+        else
+	    ciphertextABAB=ofb(plaintext,a,aInv,b,bInv,p);
 
         var output = decode(ciphertextABAB, charsPerBlock, BITS_PER_CHAR);
         $('#output').val(output);
