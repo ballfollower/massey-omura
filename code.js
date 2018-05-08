@@ -24,12 +24,7 @@ $(function () {
         var plaintext = encode(this.value, charsPerBlock, BITS_PER_CHAR);
         $('#inputEncoded').val(plaintext);
 
-	var ciphertextABAB;
-	
-	if($("#ecb").prop("checked"))
-	    ciphertextABAB=ecb(plaintext);
-        else
-	    ciphertextABAB=ofb(plaintext,a,aInv,b,bInv,p);
+        var ciphertextABAB = ecb(plaintext);
 
         var output = decode(ciphertextABAB, charsPerBlock, BITS_PER_CHAR);
         $('#output').val(output);
@@ -75,7 +70,7 @@ function padBitString(bitstring, length) {
     while (bitstring.length < length) {
         bitstring = "0" + bitstring;
     }
-    
+
     return bitstring;
 }
 
@@ -133,7 +128,7 @@ function decode(numbers, chars_per_block, bits_per_char) {
 
     for (var i = 0; i < numbers.length - 1; i++) {
         const NUMBER_BITSTRING = padBitString(numbers[i].toString(2),
-        chars_per_block*bits_per_char);
+                chars_per_block * bits_per_char);
 
         for (var j = 0; j < chars_per_block; j++) {
             const CHAR_BITSTRING = NUMBER_BITSTRING.slice(j * bits_per_char,
@@ -143,7 +138,7 @@ function decode(numbers, chars_per_block, bits_per_char) {
     }
 
     const LAST_NUMBER_BITSTRING = padBitString(
-            numbers[numbers.length - 1].toString(2),chars_per_block*bits_per_char);
+            numbers[numbers.length - 1].toString(2), chars_per_block * bits_per_char);
     const CHARACTERS_PADDED = parseInt(LAST_NUMBER_BITSTRING.substring(
             LAST_NUMBER_BITSTRING.length - bits_per_char), 2);
 
