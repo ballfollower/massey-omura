@@ -1,84 +1,84 @@
 <html>
-  <head>
-    <link rel="stylesheet" type="text/css" href="style.css" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <!--<script src="https://peterolson.github.com/BigInteger.js/BigInteger.min.js"></script>-->
-    <script src="BigInteger.min.js"></script>
-    <script src="code.js"></script>
-    <script src="ecb.js"></script>
-    <script src="ofb.js"></script>
-  </head>
-  <body>
+    <head>
+        <link rel="stylesheet" type="text/css" href="style.css" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <!--<script src="https://peterolson.github.com/BigInteger.js/BigInteger.min.js"></script>-->
+        <script src="BigInteger.min.js"></script>
+        <script src="code.js"></script>
+        <script src="ecb.js"></script>
+        <script src="ofb.js"></script>
+    </head>
+    <body>
 
-    <table>
+        <table>
 
-      <tr>
-        <td></td>
-        <td>
-          <table>
-	    <tr><td class="label">p</td><td class="labeled"><input type="text" id="p" /></td></tr>
-            <tr><td colspan="2" class="centeredCell"><button id="drawingButton">Draw</button>
-		<input type="text" id="pBits" value="64" style="width: 45px;" />-bit one</td></tr>
-	  </table>
-        </td>
-        <td></td>
-      </tr>
+            <tr>
+                <td></td>
+                <td>
+                    p = <input type="text" class="paramInput" id="p" />  
+                    <div style="text-align: center;">
+                        <button id="drawingButton">Draw</button>
+                        <input type="text" id="pBits" value="64" style="width: 45px;" />-bit one
+                    </div>
+                </td>
+                <td></td>
+            </tr>
 
-      <tr>
-        <td>
-          a <input type="text" id="a" />
-        </td>
-        <td></td>
-        <td>
-          b <input type="text" id="b" />
-        </td>
-      </tr>
+            <tr>
+                <td>
+                    a <input type="text" id="a" />
+                </td>
+                <td></td>
+                <td>
+                    b <input type="text" id="b" />
+                </td>
+            </tr>
 
-      <tr>
-        <td>
-          a<sup>-1</sup><input type="text" id="aInv" />
-        </td>
-        <td></td>
-        <td>
-          b<sup>-1</sup><input type="text" id="bInv" />
-        </td>
-      </tr>
+            <tr>
+                <td>
+                    a<sup>-1</sup><input type="text" id="aInv" />
+                </td>
+                <td></td>
+                <td>
+                    b<sup>-1</sup><input type="text" id="bInv" />
+                </td>
+            </tr>
 
-      <tr>
-        <td colspan="2">
-          <input type="text" id="input" value="Grzegorz Klosinski" /><br />
-          <input type="text" id="inputEncoded" /><br />
+            <tr>
+                <td colspan="2">
+                    <input type="text" id="input" value="Grzegorz Klosinski" /><br />
+                    <input type="text" id="inputEncoded" /><br />
 
-	  <input type="text" id="aEncrypted" />
-        </td>
-        <td></td>
-      </tr>
-      <tr>
-        <td></td>
-        <td colspan="2">
-          <input type="text" id="bEncrypted" />
-        </td>
-      </tr>
+                    <input type="text" id="aEncrypted" />
+                </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td colspan="2">
+                    <input type="text" id="bEncrypted" />
+                </td>
+            </tr>
 
-      <tr>
-        <td colspan="2">
-          <input type="text" id="aDecrypted" />
-        </td>
-        <td></td>
-      </tr>
+            <tr>
+                <td colspan="2">
+                    <input type="text" id="aDecrypted" />
+                </td>
+                <td></td>
+            </tr>
 
-      <tr>
-        <td></td>
-        <td colspan="2">
-          <input type="text" id="outputEncoded" /><br />
-          <input type="text" id="output" />
-        </td>
-      </tr>
+            <tr>
+                <td></td>
+                <td colspan="2">
+                    <input type="text" id="outputEncoded" /><br />
+                    <input type="text" id="output" />
+                </td>
+            </tr>
 
-    </table>
-    <fieldset>
-      <legend>Mode</legend>
-      <input type="radio" name="mode" id="ecb" checked="true" /> ECB
-    </fieldset>
-  </body>
+        </table>
+        <fieldset>
+            <legend>Mode</legend>
+            <input type="radio" name="mode" id="ecb" checked="true" /> ECB
+        </fieldset>
+    </body>
 </html>
