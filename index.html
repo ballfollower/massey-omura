@@ -13,9 +13,9 @@
         <table style="width: 95%;">
 
             <tr>
-                <td></td>
+                <td style="width: 150px;"></td>
                 <td>
-                    <div style="margin: 20 auto 8 auto; border: 3px solid lightgray; padding: 10px; background-color: darkslategrey; color: white;">
+                    <div class="blackboard">
                         p = <input type="text" class="paramInput" id="p" />  
 
                     </div>
@@ -24,33 +24,31 @@
                         <input type="text" id="pBits" value="64" style="width: 45px;" />-bit one
                     </div>
                 </td>
-                <td></td>
+                <td style="width: 150px;"></td>
             </tr>
 
             <tr>
                 <td>
-                    a <input type="text" id="a" />
+                    <div class="blackboard">
+                        a <input type="text" id="a" /><br />
+                        a<sup>-1</sup><input type="text" id="aInv" />
+                    </div>
                 </td>
-                <td></td>
                 <td>
-                    b <input type="text" id="b" />
+                    Message: <input type="text" id="input" value="Grzegorz Klosinski" /><br />
+                    Encoded: <input type="text" id="inputEncoded" />
                 </td>
-            </tr>
-
-            <tr>
                 <td>
-                    a<sup>-1</sup><input type="text" id="aInv" />
-                </td>
-                <td></td>
-                <td>
-                    b<sup>-1</sup><input type="text" id="bInv" />
+                    <div class="blackboard">
+                        b <input type="text" id="b" /><br />
+                        b<sup>-1</sup><input type="text" id="bInv" />
+                    </div>
                 </td>
             </tr>
 
             <tr>
                 <td colspan="2">
-                    <input type="text" id="input" value="Grzegorz Klosinski" /><br />
-                    <input type="text" id="inputEncoded" /><br />
+                    
 
                     <input type="text" id="aEncrypted" />
                 </td>
@@ -79,9 +77,5 @@
             </tr>
 
         </table>
-        <fieldset>
-            <legend>Mode</legend>
-            <input type="radio" name="mode" id="ecb" checked="true" /> ECB
-        </fieldset>
     </body>
 </html>

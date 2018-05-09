@@ -1,3 +1,9 @@
 @CHARSET "UTF-8";
 
-
+.blackboard{
+    margin: 0 auto; 
+    border: 3px solid lightgray; 
+    padding: 10px; 
+    background-color: darkslategrey; 
+    color: white;
+}
