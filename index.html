@@ -22,8 +22,8 @@
                 <input type="text" id="pBits" value="64" style="width: 45px;" />-bit one
             </div>
 
-            <div>
-                <div class="blackboard" style="float: left;">
+            <div class="rowDiv">
+                <div class="blackboard leftColumn" style="float: left;">
                     <table class="paramsTable">
                         <tr>
                             <td>a =</td>
@@ -39,7 +39,7 @@
                     Message: <input type="text" id="input" value="Grzegorz Klosinski" /><br />
                     Encoded: <input type="text" id="inputEncoded" />
                 </div>
-                <div class="blackboard">
+                <div class="blackboard rightColumn">
                     <table class="paramsTable">
                         <tr>
                             <td>b =</td>
@@ -53,8 +53,8 @@
                 </div>
             </div>
 
-            <div>
-                <div>
+            <div class="rowDiv">
+                <div class="leftColumn">
                     <img class="partyIcon" src="graphics/woman.png" />
                 </div>
                 <div>
@@ -65,16 +65,21 @@
                     <input type="text" id="aDecrypted" />
                     <span class="arrow">&rightarrow;</span>
                 </div>
-                <div>
+                <div class="rightColumn">
                     <img class="partyIcon" src="graphics/man.png" />
                 </div>
             </div>
 
-            <div>
-                Obtained: <input type="text" id="outputEncoded" /><br />
-                Decoded: <input type="text" id="output" />
-            </div>
-
+            <table class="paramsTable">
+                <tr>
+                    <td>Obtained:</td>
+                    <td><input type="text" id="outputEncoded" /></td>
+                </tr>
+                <tr>
+                    <td>Decoded:</td>
+                    <td><input type="text" id="output" /></td>
+                </tr>        
+            </table>
         </div>
     </body>
 

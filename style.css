@@ -16,8 +16,25 @@
 .paramsTable{
     color: inherit;
     margin: auto;
+    clear: both;
 }
 
 .paramsTable td{
-  text-align: right;
+    text-align: right;
+}
+
+.leftColumn{
+    width: 240px;
+    float: left;
+    text-align: center;
+}
+
+.rightColumn{
+    width: 240px;
+    float: right;
+    text-align: center;
+}
+
+.rowDiv{
+    clear: both;
 }
