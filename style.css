@@ -38,3 +38,13 @@
 .rowDiv{
     clear: both;
 }
+
+#transmission{
+    margin-left: 280px;
+    width: 100%;
+    overflow: hidden;
+}
+
+#transmission input{
+    width: 100%;
+}
