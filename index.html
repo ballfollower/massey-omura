@@ -1,77 +1,86 @@
 <html>
-    <head>
-        <link rel="stylesheet" type="text/css" href="style.css" />
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <!--<script src="https://peterolson.github.com/BigInteger.js/BigInteger.min.js"></script>-->
-        <script src="BigInteger.min.js"></script>
-        <script src="code.js"></script>
-        <script src="ecb.js"></script>
-        <script src="ofb.js"></script>
-    </head>
-    <body>
 
-        <table style="width: 95%;">
+<head>
+  <link rel="stylesheet" type="text/css" href="style.css" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <!--<script src="https://peterolson.github.com/BigInteger.js/BigInteger.min.js"></script>-->
+  <script src="BigInteger.min.js"></script>
+  <script src="code.js"></script>
+  <script src="ecb.js"></script>
+  <script src="ofb.js"></script>
+</head>
 
+<body>
+
+  <table style="width: 95%;">
+
+    <tr>
+      <td style="width: 150px;"></td>
+      <td>
+        <div class="blackboard">
+          p = <input type="text" class="paramInput" id="p" />
+
+        </div>
+        <div style="text-align: center;">
+          <button id="drawingButton">Draw</button>
+          <input type="text" id="pBits" value="64" style="width: 45px;" />-bit one
+        </div>
+      </td>
+      <td style="width: 150px;"></td>
+    </tr>
+
+    <tr>
+      <td>
+        <div class="blackboard">
+          <table class="paramsTable">
             <tr>
-                <td style="width: 150px;"></td>
-                <td>
-                    <div class="blackboard">
-                        p = <input type="text" class="paramInput" id="p" />  
-
-                    </div>
-                    <div style="text-align: center;">
-                        <button id="drawingButton">Draw</button>
-                        <input type="text" id="pBits" value="64" style="width: 45px;" />-bit one
-                    </div>
-                </td>
-                <td style="width: 150px;"></td>
+              <td style="text-align: right;">a =</td>
+              <td><input type="text" id="a" /></td>
             </tr>
-
             <tr>
-                <td>
-                    <div class="blackboard">
-                        a = <input type="text" id="a" /><br />
-                        a<sup>-1</sup> = <input type="text" id="aInv" />
-                    </div>
-                </td>
-                <td>
-                    Message: <input type="text" id="input" value="Grzegorz Klosinski" /><br />
-                    Encoded: <input type="text" id="inputEncoded" />
-                </td>
-                <td>
-                    <div class="blackboard">
-                        b = <input type="text" id="b" /><br />
-                        b<sup>-1</sup> = <input type="text" id="bInv" />
-                    </div>
-                </td>
+              <td>a<sup>-1</sup> =</td>
+              <td><input type="text" id="aInv" /></td>
             </tr>
+          </table>
+        </div>
+      </td>
+      <td>
+        Message: <input type="text" id="input" value="Grzegorz Klosinski" /><br /> Encoded: <input type="text" id="inputEncoded" />
+      </td>
+      <td>
+        <div class="blackboard">
+          b = <input type="text" id="b" /><br /> b
+          <sup>-1</sup> = <input type="text" id="bInv" />
+        </div>
+      </td>
+    </tr>
 
-            <tr>
-                <td>
-                    <img class="partyIcon" src="graphics/woman.png" />
-                </td>
-                <td>
-                    <input type="text" id="aEncrypted" />
-                    <span class="arrow">&rightarrow;</span><br />
-                    <span class="arrow">&leftarrow;</span>
-                    <input type="text" id="bEncrypted" /><br />
-                    <input type="text" id="aDecrypted" />
-                    <span class="arrow">&rightarrow;</span>
-                </td>
-                <td>
-                    <img class="partyIcon" src="graphics/man.png" />
-                </td>
-            </tr>
-         
-            <tr>
-                <td></td>
-                <td>
-                    Obtained: <input type="text" id="outputEncoded" /><br />
-                    Decoded: <input type="text" id="output" />
-                </td>
-                <td></td>
-            </tr>
+    <tr>
+      <td>
+        <img class="partyIcon" src="graphics/woman.png" />
+      </td>
+      <td>
+        <input type="text" id="aEncrypted" />
+        <span class="arrow">&rightarrow;</span><br />
+        <span class="arrow">&leftarrow;</span>
+        <input type="text" id="bEncrypted" /><br />
+        <input type="text" id="aDecrypted" />
+        <span class="arrow">&rightarrow;</span>
+      </td>
+      <td>
+        <img class="partyIcon" src="graphics/man.png" />
+      </td>
+    </tr>
 
-        </table>
-    </body>
+    <tr>
+      <td></td>
+      <td>
+        Obtained: <input type="text" id="outputEncoded" /><br /> Decoded: <input type="text" id="output" />
+      </td>
+      <td></td>
+    </tr>
+
+  </table>
+</body>
+
 </html>

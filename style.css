@@ -4,12 +4,15 @@
     margin: 0 auto; 
     border: 3px solid lightgray; 
     padding: 10px; 
-    background-color: darkslategrey; 
-    color: white;
+    background-color: darkslategrey;
 }
 
 .partyIcon{
     height: 180px;
+}
+
+.paramsTable td{
+  text-align: right;
 }
 
 td{
