@@ -5,16 +5,22 @@
     border: 3px solid lightgray; 
     padding: 10px; 
     background-color: darkslategrey;
+    color: white;
 }
 
 .partyIcon{
     height: 180px;
 }
 
-.paramsTable td{
-  text-align: right;
-}
-
 td{
   text-align: center;
+}
+
+.paramsTable{
+    color: inherit;
+    margin: auto;
+}
+
+.paramsTable td{
+  text-align: right;
 }
