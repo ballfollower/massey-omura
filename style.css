@@ -35,18 +35,19 @@
     clear: both;
 }
 
-#transmission{
+.centerCellDiv{
     text-align: center;
     vertical-align: middle;
     display: table-cell;
     width: auto;
+    padding: 0 40;
 }
 
-#transmission table{
+.centerCellDiv table{
     width: 100%;
 }
 
-#transmission input{
+.centerCellDiv input{
     width: 100%;
     overflow: hidden;
 }
@@ -55,3 +56,8 @@
     width: 40px;
     font-size: xx-large;
 }
+
+.centerCellDiv .labelCell{
+    width: 1;
+}
+
