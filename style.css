@@ -23,28 +23,35 @@
     text-align: right;
 }
 
-.leftColumn{
+.leftColumn, .rightColumn{
     width: 240px;
-    float: left;
-    text-align: center;
-}
-
-.rightColumn{
-    width: 240px;
-    float: right;
+    display: table-cell;
     text-align: center;
 }
 
 .rowDiv{
+    display: table;
+    width: 100%;
     clear: both;
 }
 
 #transmission{
-    margin-left: 280px;
+    text-align: center;
+    vertical-align: middle;
+    display: table-cell;
+    width: auto;
+}
+
+#transmission table{
     width: 100%;
-    overflow: hidden;
 }
 
 #transmission input{
     width: 100%;
+    overflow: hidden;
+}
+
+.arrow{
+    width: 40px;
+    font-size: xx-large;
 }

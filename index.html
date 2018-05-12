@@ -23,7 +23,7 @@
             </div>
 
             <div class="rowDiv">
-                <div class="blackboard leftColumn" style="float: left;">
+                <div class="blackboard leftColumn">
                     <table class="paramsTable">
                         <tr>
                             <td>a =</td>
@@ -35,7 +35,7 @@
                         </tr>
                     </table>
                 </div>
-                <div style="float: left;">
+                <div style="display: table-cell; text-align: center;">
                     Message: <input type="text" id="input" value="Grzegorz Klosinski" /><br />
                     Encoded: <input type="text" id="inputEncoded" />
                 </div>
@@ -58,12 +58,36 @@
                     <img class="partyIcon" src="graphics/woman.png" />
                 </div>
                 <div id="transmission">
-                    <div style="float: left;"><input type="text" id="aEncrypted" /></div>
-                    <div class="arrow">&rightarrow;</div>
-                    <div class="arrow" style="float: left;">&leftarrow;</div>
-                    <div><input type="text" id="bEncrypted" /></div>
-                    <div style="float: left;"><input type="text" id="aDecrypted" /></div>
-                    <div class="arrow">&rightarrow;</div>
+                    <table>
+                        <tr>
+                            <td>
+                                <input type="text" id="aEncrypted" class="leftInput" />
+                            </td>
+                            <td class="arrow">
+                                &rightarrow;
+                            </td>
+                        </tr>
+                    </table>
+                    <table>
+                        <tr>
+                            <td class="arrow">
+                                &leftarrow;
+                            </td>
+                            <td>
+                                <input type="text" id="bEncrypted" class="rightInput" />
+                            </td>
+                        </tr>
+                    </table>
+                    <table>
+                        <tr>
+                            <td>
+                                <input type="text" id="aDecrypted" class="leftInput" />
+                            </td>
+                            <td class="arrow">
+                                &rightarrow;
+                            </td>
+                        </tr>
+                    </table>
                 </div>
                 <div class="rightColumn">
                     <img class="partyIcon" src="graphics/man.png" />
