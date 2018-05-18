@@ -4,27 +4,33 @@
     margin: 0 auto; 
     border: 3px solid lightgray; 
     padding: 10px; 
-    width: 240px;
+    width: 300px;
     background-color: darkslategrey;
     color: white;
 }
 
 .partyIcon{
     height: 180px;
+    margin-bottom: -30;
 }
 
 .paramsTable{
     color: inherit;
     margin: auto;
     clear: both;
+    width: 100%;
 }
 
-.paramsTable td{
-    text-align: right;
+.paramsTable .labelCell{
+    width: auto;
 }
 
-.leftColumn, .rightColumn{
-    width: 240px;
+.paramsTable input{
+    width: 100%;
+}
+
+.column{
+    width: 300px;
     display: table-cell;
     text-align: center;
 }
