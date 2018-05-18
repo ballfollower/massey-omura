@@ -10,7 +10,7 @@
         <script src="ofb.js"></script>
     </head>
 
-    <body>
+    <body style="background-color: beige;">
 
         <div style="width: auto; margin: 20;">
 
@@ -18,11 +18,11 @@
                 <table class="paramsTable">
                         <tr>
                             <td class="labelCell">p =</td>
-                            <td><input type="text" class="paramInput" id="p" /></td>
+                            <td><input type="text" class="paramInput" id="p" readonly="readonly" /></td>
                         </tr>
                     </table>
             </div>
-            <div style="text-align: center;">
+            <div style="text-align: center; margin: 5 0 10 0;">
                 <button id="drawingButton">Draw</button>
                 <input type="text" id="pBits" value="64" style="width: 45px;" />-bit one
             </div>
@@ -32,11 +32,11 @@
                     <table class="paramsTable">
                         <tr>
                             <td class="labelCell">a =</td>
-                            <td><input type="text" id="a" /></td>
+                            <td><input type="text" id="a" readonly="readonly" /></td>
                         </tr>
                         <tr>
                             <td class="labelCell">a<sup>-1</sup> =</td>
-                            <td><input type="text" id="aInv" /></td>
+                            <td><input type="text" id="aInv" readonly="readonly" /></td>
                         </tr>
                     </table>
                 </div>
@@ -55,7 +55,7 @@
                                 Encoded:
                             </td>
                             <td>
-                                <input type="text" id="inputEncoded" />
+                                <input type="text" id="inputEncoded" readonly="readonly" />
                             </td>
                         </tr>
                     </table>
@@ -64,11 +64,11 @@
                     <table class="paramsTable">
                         <tr>
                             <td class="labelCell">b =</td>
-                            <td><input type="text" id="b" /></td>
+                            <td><input type="text" id="b" readonly="readonly" /></td>
                         </tr>
                         <tr>
                             <td class="labelCell">b<sup>-1</sup> =</td>
-                            <td><input type="text" id="bInv" /></td>
+                            <td><input type="text" id="bInv" readonly="readonly" /></td>
                         </tr>
                     </table>
                 </div>
@@ -82,7 +82,7 @@
                     <table>
                         <tr>
                             <td>
-                                <input type="text" id="aEncrypted" class="leftInput" />
+                                <input type="text" id="aEncrypted" class="leftInput" readonly="readonly" />
                             </td>
                             <td class="arrow">
                                 &rightarrow;
@@ -95,14 +95,14 @@
                                 &leftarrow;
                             </td>
                             <td>
-                                <input type="text" id="bEncrypted" class="rightInput" />
+                                <input type="text" id="bEncrypted" class="rightInput" readonly="readonly" />
                             </td>
                         </tr>
                     </table>
                     <table>
                         <tr>
                             <td>
-                                <input type="text" id="aDecrypted" class="leftInput" />
+                                <input type="text" id="aDecrypted" class="leftInput" readonly="readonly" />
                             </td>
                             <td class="arrow">
                                 &rightarrow;
@@ -123,11 +123,11 @@
                     <table class="paramsTable">
                         <tr>
                             <td class="labelCell">Obtained:</td>
-                            <td><input type="text" id="outputEncoded" /></td>
+                            <td><input type="text" id="outputEncoded" readonly="readonly" /></td>
                         </tr>
                         <tr>
                             <td class="labelCell">Decoded:</td>
-                            <td><input type="text" id="output" /></td>
+                            <td><input type="text" id="output" readonly="readonly" /></td>
                         </tr>        
                     </table>    
                 </div>
