@@ -1,0 +1,19 @@
+\documentclass[12pt, a4paper]{article}
+
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+
+\usepackage[cp1250]{inputenc}
+\usepackage{polski}
+\usepackage[polish, english]{babel}
+
+\begin{document}
+Grzegorz K³osiñski
+\section{Theory}
+The \textbf{Massey-Omura system} is an improvement to the \textbf{Shamir's three-pass protocol}. The only difference is usage of different groups -- in the former case the $GF(2^m)^{*}$ (for $m \in \mathbb{Z}$) and in the latter -- $GF(p)^{*}$. The project realizes the Shamir's protocol and this one will be described.
+
+The protocol allows two parties to pass a secret message through a public channel. We assume the passive adversary.
+
+A one-time preparation step is required. Parties choose at random a large prime $p$, such that one cannot compute discrete logarithms mod $p$. The number is published. Then each party, \textit{A} and \textit{b}, draws a secret number, $a$ and $b$ respectively, such that $a, b \in \{1,2,\ldots,p-2\}$, $(a, p-1)=1$ and $(b, p-1)=1$.
+\end{document}
