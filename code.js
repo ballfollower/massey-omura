@@ -64,10 +64,6 @@ function drawEncryptionKey(prime) {
     return key;
 }
 
-function splitIntoBlocks(text, chars_per_block) {
-    return text.match(new RegExp('.{1,' + chars_per_block + '}', 'g')).join('\u2605');
-}
-
 function charTo8bitString(char) {
     var result = char.charCodeAt(0).toString(2);
 
