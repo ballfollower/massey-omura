@@ -23,6 +23,7 @@
 
 .paramsTable .labelCell{
     width: auto;
+    text-align: right;
 }
 
 .paramsTable input{
