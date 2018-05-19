@@ -64,12 +64,25 @@ function drawEncryptionKey(prime) {
     return key;
 }
 
+/**
+ * Converts a character to its ASCII code and represents it as an 8-bit string
+ * 
+ * @param char The character
+ * @returns The bitstring
+ */
 function charTo8bitString(char) {
     var result = char.charCodeAt(0).toString(2);
 
     return "00000000".substr(result.length) + result;
 }
 
+/**
+ * Pads the given bitstring with leading zeros to obtain the given length
+ * 
+ * @param bitstring The bitstring
+ * @param length The length
+ * @returns The padded bitstring
+ */
 function padBitString(bitstring, length) {
     while (bitstring.length < length) {
         bitstring = "0" + bitstring;
@@ -86,10 +99,10 @@ function padBitString(bitstring, length) {
  * 
  * -----|-----|--rra
  * 
- * @param {type} text
- * @param {type} chars_per_block
- * @param {type} bits_per_char
- * @returns {Array|encode.output}
+ * @param text The blocks represented as one string
+ * @param chars_per_block Characters per a block
+ * @param bits_per_char Bits per a character
+ * @returns An array of integers representing subsequent blocks
  */
 function encode(text, chars_per_block, bits_per_char) {
     var output = [];
@@ -98,6 +111,8 @@ function encode(text, chars_per_block, bits_per_char) {
     var bitString;
 
     var currentPosition = 0;
+    
+    // Process whole blocks, without the remainder
     for (var i = 0; i < BLOCKS; i++) {
         bitString = "";
 
@@ -109,17 +124,25 @@ function encode(text, chars_per_block, bits_per_char) {
     }
 
     const REMAINDER = text.length % chars_per_block;
+    
+    // Subtracting 1 takes care of the appendix byte
     const CHARACTERS_TO_PAD = chars_per_block - 1 - REMAINDER;
 
     bitString = "";
+    
+    // Process the remainder
     while (currentPosition < text.length) {
         bitString += charTo8bitString(text[currentPosition++]);
     }
+    
+    // Add random bytes
     for (var i = 0; i < CHARACTERS_TO_PAD; i++) {
         var randomCharBitstring = bigInt.randBetween(0, 255).toString(2);
 
         bitString += padBitString(randomCharBitstring, bits_per_char);
     }
+    
+    // Add the appendix
     bitString += padBitString(CHARACTERS_TO_PAD.toString(2), bits_per_char);
 
     output.push(bigInt(bitString, 2));
