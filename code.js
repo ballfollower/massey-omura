@@ -33,6 +33,9 @@ $(function () {
     });
 });
 
+/**
+ * Clears all the message-related input fields
+ */
 function clear(){
     $(".centerCellDiv input").val("");
 }
