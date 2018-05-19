@@ -2,6 +2,8 @@ $(function () {
     const BITS_PER_CHAR = 8;
 
     $('#drawingButton').on('click', function () {
+        clear();
+        
         $("#p").val(randomProbablePrime($('#pBits').val()).toString(10));
         p = bigInt($("#p").val());
 
@@ -31,6 +33,9 @@ $(function () {
     });
 });
 
+function clear(){
+    $(".centerCellDiv input").val("");
+}
 
 function randomProbablePrime(len) {
     var a;
