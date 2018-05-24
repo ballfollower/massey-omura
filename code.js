@@ -67,8 +67,8 @@ function drawEncryptionKey(prime) {
 /**
  * Converts a character to its ASCII code and represents it as an 8-bit string
  * 
- * @param char The character
- * @returns The bitstring
+ * @param {String} char The character
+ * @returns {String} The bitstring
  */
 function charTo8bitString(char) {
     var result = char.charCodeAt(0).toString(2);
@@ -79,9 +79,9 @@ function charTo8bitString(char) {
 /**
  * Pads the given bitstring with leading zeros to obtain the given length
  * 
- * @param bitstring The bitstring
- * @param length The length
- * @returns The padded bitstring
+ * @param {String} bitstring The bitstring
+ * @param {Number} length The length
+ * @returns {String} The padded bitstring
  */
 function padBitString(bitstring, length) {
     while (bitstring.length < length) {
@@ -99,10 +99,10 @@ function padBitString(bitstring, length) {
  * 
  * -----|-----|--rra
  * 
- * @param text The blocks represented as one string
- * @param chars_per_block Characters per a block
- * @param bits_per_char Bits per a character
- * @returns An array of integers representing subsequent blocks
+ * @param {String} text The blocks represented as one string
+ * @param {Number} chars_per_block Characters per a block
+ * @param {Number} bits_per_char Bits per a character
+ * @returns {Array} An array of integers representing subsequent blocks
  */
 function encode(text, chars_per_block, bits_per_char) {
     var output = [];
@@ -150,6 +150,15 @@ function encode(text, chars_per_block, bits_per_char) {
     return output;
 }
 
+/**
+ * Decodes an array of natural numbers back to string, erasing unnecessary
+ * trailing characters 
+ * 
+ * @param {Array} numbers
+ * @param {type} chars_per_block
+ * @param {type} bits_per_char
+ * @returns {String}
+ */
 function decode(numbers, chars_per_block, bits_per_char) {
     var output = "";
 
