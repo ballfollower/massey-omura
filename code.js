@@ -24,7 +24,7 @@ $(function () {
 
     $('#input').on('change', function () {
         var plaintext = encode(this.value, charsPerBlock, BITS_PER_CHAR);
-        $('#inputEncoded').val(plaintext);
+        $('#inputEncoded').val(writeAllDigitsOfIntegerArray(plaintext));
 
         var ciphertextABAB = ecb(plaintext);
 
@@ -38,6 +38,19 @@ $(function () {
  */
 function clear(){
     $(".centerCellDiv input").val("");
+}
+
+function writeAllDigitsOfIntegerArray(array, separator=" \u2756 "){
+    var result = "";
+    
+    for (var i = 0; i < array.length; i++) {
+	if(i>0){
+	    result+=separator;
+	}
+	result+=array[i].toString(10);
+    }
+    
+    return result;
 }
 
 function randomProbablePrime(len) {
@@ -190,16 +203,16 @@ function decode(numbers, chars_per_block, bits_per_char) {
 
 function ecb(plaintext) {
     var ciphertextA = ecbTransform(plaintext, a, p);
-    $('#aEncrypted').val(ciphertextA);
+    $('#aEncrypted').val(writeAllDigitsOfIntegerArray(ciphertextA));
 
     var ciphertextAB = ecbTransform(ciphertextA, b, p);
-    $('#bEncrypted').val(ciphertextAB);
+    $('#bEncrypted').val(writeAllDigitsOfIntegerArray(ciphertextAB));
 
     var ciphertextABA = ecbTransform(ciphertextAB, aInv, p);
-    $('#aDecrypted').val(ciphertextABA);
+    $('#aDecrypted').val(writeAllDigitsOfIntegerArray(ciphertextABA));
 
     var ciphertextABAB = ecbTransform(ciphertextABA, bInv, p);
-    $('#outputEncoded').val(ciphertextABAB);
+    $('#outputEncoded').val(writeAllDigitsOfIntegerArray(ciphertextABAB));
 
     return ciphertextABAB;
 }
