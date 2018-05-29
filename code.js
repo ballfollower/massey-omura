@@ -40,6 +40,14 @@ function clear(){
     $(".centerCellDiv input").val("");
 }
 
+/**
+ * Converts an array of (large) integers to string representation. Unfolds every
+ * integer, showing all the digits.
+ * 
+ * @param {Array} array The array
+ * @param {String} separator The separator to be put between the array elements
+ * @returns {String} The string representation
+ */
 function writeAllDigitsOfIntegerArray(array, separator=" \u2756 "){
     var result = "";
     
@@ -58,9 +66,11 @@ function randomProbablePrime(len) {
     const LOWER_BOUND = bigInt(2).pow(len - 1);
     const UPPER_BOUND = bigInt(2).pow(len).prev();
 
+    const SIEVING_BOUND=500;
+
     do {
         a = bigInt.randBetween(LOWER_BOUND, UPPER_BOUND);
-    } while (!a.isProbablePrime());
+    } while (divideTentatively(a,SIEVING_BOUND)!=-1 || !a.isProbablePrime());
 
     return a;
 }
@@ -73,7 +83,9 @@ function randomProbablePrime(len) {
  * @return {Number} a non trivial divisor or -1 if not found
  */
 function divideTentatively(n, bound) {
-    var divisors = sieve(bound);
+    const REASONABLE_BOUND=bigInt.min(n.prev(),bound);
+    
+    var divisors = sieve(REASONABLE_BOUND);
 
     for (var i=0;i<divisors.length;i++) {
         if (n.isDivisibleBy(divisors[i])) {
