@@ -72,12 +72,12 @@ function randomProbablePrime(len) {
  * @param {Number} trials number of trial divisions to be performed
  * @return {Number} a non trivial divisor or -1 if not found
  */
-function divideTentatively(n, trials) {
-    var divisors = findFirstPrimes(trials);
+function divideTentatively(n, bound) {
+    var divisors = sieve(bound);
 
-    for (var divisor in divisors) {
-        if (n.isDivisibleBy(divisor)) {
-            return divisor;
+    for (var i=0;i<divisors.length;i++) {
+        if (n.isDivisibleBy(divisors[i])) {
+            return divisors[i];
         }
     }
 
@@ -85,46 +85,28 @@ function divideTentatively(n, trials) {
 }
 
 /**
- * Finds the first n primes
- * 
- * @param n primes number
- * @return primes found
- */
-vector<int> findFirstPrimes(int n) {
-    vector<int> primes;
-
-    if (n < 6) {
-        primes = vector<int>{2, 3, 5, 7, 11};
-    } else {
-        float boundForSieve = n * (log(n) + log(log(n)));
-        primes = sieve((int) boundForSieve);
-    }
-
-    return vector<int>(primes.begin(), primes.begin() + n);
-}
-
-/**
  * Applies Eratosthenes sieve
  * 
- * @param bound the upper bound for search space
- * @return primes found
+ * @param {Number} bound the upper bound for search space
+ * @return {Array} primes found
  */
-vector<int> sieve(int bound) {
-    vector<int> primes;
-    vector<bool> nums = vector<bool>(bound + 1, true);
+function sieve(bound) {
+    var primes=[];
+    var nums = Array.apply(null, Array(bound+1)).map(Boolean.prototype.valueOf,true);
 
-    int i;
-    for (i = 2; i <= sqrt(bound); ++i) {
+    var i;
+    
+    for (i = 2; i <= Math.sqrt(bound); i++) {
         if (nums[i]) {
-            primes.push_back(i);
-            for (int j = i * i; j <= bound; j += i) {
+            primes.push(i);
+            for (var j = i * i; j <= bound; j += i) {
                 nums[j] = false;
             }
         }
     }
-    for (; i <= bound; ++i) {
+    for (; i <= bound; i++) {
         if (nums[i]) {
-            primes.push_back(i);
+            primes.push(i);
         }
     }
 
