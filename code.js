@@ -65,6 +65,72 @@ function randomProbablePrime(len) {
     return a;
 }
 
+/**
+ * Performs the trial division factoring algorithm
+ * 
+ * @param {Number} n the number to factor
+ * @param {Number} trials number of trial divisions to be performed
+ * @return {Number} a non trivial divisor or -1 if not found
+ */
+function divideTentatively(n, trials) {
+    var divisors = findFirstPrimes(trials);
+
+    for (var divisor in divisors) {
+        if (n.isDivisibleBy(divisor)) {
+            return divisor;
+        }
+    }
+
+    return -1;
+}
+
+/**
+ * Finds the first n primes
+ * 
+ * @param n primes number
+ * @return primes found
+ */
+vector<int> findFirstPrimes(int n) {
+    vector<int> primes;
+
+    if (n < 6) {
+        primes = vector<int>{2, 3, 5, 7, 11};
+    } else {
+        float boundForSieve = n * (log(n) + log(log(n)));
+        primes = sieve((int) boundForSieve);
+    }
+
+    return vector<int>(primes.begin(), primes.begin() + n);
+}
+
+/**
+ * Applies Eratosthenes sieve
+ * 
+ * @param bound the upper bound for search space
+ * @return primes found
+ */
+vector<int> sieve(int bound) {
+    vector<int> primes;
+    vector<bool> nums = vector<bool>(bound + 1, true);
+
+    int i;
+    for (i = 2; i <= sqrt(bound); ++i) {
+        if (nums[i]) {
+            primes.push_back(i);
+            for (int j = i * i; j <= bound; j += i) {
+                nums[j] = false;
+            }
+        }
+    }
+    for (; i <= bound; ++i) {
+        if (nums[i]) {
+            primes.push_back(i);
+        }
+    }
+
+    return primes;
+}
+
 function drawEncryptionKey(prime) {
     var key;
     const LOWER_BOUND = bigInt(2);
