@@ -78,9 +78,9 @@ function randomProbablePrime(len) {
 /**
  * Performs the trial division factoring algorithm
  * 
- * @param {Number} n the number to factor
- * @param {Number} trials number of trial divisions to be performed
- * @return {Number} a non trivial divisor or -1 if not found
+ * @param {Number} n The number to factor
+ * @param {Number} bound The largest divisor to be tested
+ * @returns {Number} A non trivial divisor or -1 if not found
  */
 function divideTentatively(n, bound) {
     const REASONABLE_BOUND=bigInt.min(n.prev(),bound);
@@ -99,8 +99,8 @@ function divideTentatively(n, bound) {
 /**
  * Applies Eratosthenes sieve
  * 
- * @param {Number} bound the upper bound for search space
- * @return {Array} primes found
+ * @param {Number} bound The upper bound for search space
+ * @returns {Array} Primes found
  */
 function sieve(bound) {
     var primes=[];
@@ -227,14 +227,15 @@ function encode(text, chars_per_block, bits_per_char) {
  * Decodes an array of natural numbers back to string, erasing unnecessary
  * trailing characters 
  * 
- * @param {Array} numbers
- * @param {type} chars_per_block
- * @param {type} bits_per_char
- * @returns {String}
+ * @param {Array} numbers The array
+ * @param {type} chars_per_block Characters per a block (per a natural number)
+ * @param {type} bits_per_char Bits per a character
+ * @returns {String} The resulting string
  */
 function decode(numbers, chars_per_block, bits_per_char) {
     var output = "";
 
+    // Process all blocks but the last, which is a special one
     for (var i = 0; i < numbers.length - 1; i++) {
         const NUMBER_BITSTRING = padBitString(numbers[i].toString(2),
                 chars_per_block * bits_per_char);
@@ -251,7 +252,7 @@ function decode(numbers, chars_per_block, bits_per_char) {
     const CHARACTERS_PADDED = parseInt(LAST_NUMBER_BITSTRING.substring(
             LAST_NUMBER_BITSTRING.length - bits_per_char), 2);
 
-
+    // Process the last block
     for (var i = 0; i < chars_per_block - 1 - CHARACTERS_PADDED; i++) {
         const CHAR_BITSTRING = LAST_NUMBER_BITSTRING.slice(i * bits_per_char,
                 (i + 1) * bits_per_char);
@@ -261,6 +262,12 @@ function decode(numbers, chars_per_block, bits_per_char) {
     return output;
 }
 
+/**
+ * Processes a plaintext with multiple ECB transformations
+ * 
+ * @param {Array} plaintext The plaintext as an array of integers (blocks)
+ * @returns {Array} The processed plaintext, equal to the original one
+ */
 function ecb(plaintext) {
     var ciphertextA = ecbTransform(plaintext, a, p);
     $('#aEncrypted').val(writeAllDigitsOfIntegerArray(ciphertextA));
@@ -277,6 +284,14 @@ function ecb(plaintext) {
     return ciphertextABAB;
 }
 
+/**
+ * Performs a single ECB transformation
+ * 
+ * @param {Array} numbers The input - an array of integers (blocks)
+ * @param {Object} exponent The exponent
+ * @param {Object} modulus The modulus
+ * @returns {Array} The output array
+ */
 function ecbTransform(numbers, exponent, modulus) {
     var result = [];
 
