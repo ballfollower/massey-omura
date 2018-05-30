@@ -19,22 +19,22 @@
 
 \maketitle
 
-\section{Theory}
-The \textbf{Massey-Omura} system is an improvement to the \textbf{Shamir's} three-pass protocol. The only difference is usage of different groups -- in the former case the $GF(2^m)^{*}$ (for $m \in \mathbb{Z}$) and in the latter -- $GF(p)^{*}$. The project realizes the Shamir's protocol and this one will be described.
+\section*{Theory}
+The Massey-Omura system is an improvement to the Shamir's three-pass protocol. The only difference is usage of different groups -- in the former case the $GF(2^m)^{*}$, for $m \in \mathbb{Z}$, and in the latter -- $GF(p)^{*}$, for $p$ a prime. The project realizes the Shamir's protocol and this one will be described.
 
-The protocol allows two parties to pass a secret message through a public channel. We assume the \textbf{passive adversary}.
+The protocol allows two parties to pass a secret message through a public channel. We assume the passive adversary.
 
-A one-time preparation step is required. Parties choose at random a large prime $p$, such that one cannot compute discrete logarithms mod $p$. The number is published. Then each party, \textit{A} and \textit{b}, draws a secret number, $a$ and $b$ respectively, such that $a, b \in \{1,2,\ldots,p-2\}$, $(a, p-1)=1$ and $(b, p-1)=1$. Finally, parties compute multiplicative inverses of their numbers: $a^{-1} (\text{mod} p-1)$ and $b^{-1} (\text{mod} p-1)$. These also have to remain secret.
+A one-time preparation step is required. Parties choose at random a large prime $p$, such that one cannot compute discrete logarithms mod $p$. The number is published. Then each party, \textit{A} and \textit{B}, draws a secret number, $a$ and $b$ respectively, such that $a, b \in \{1,2,\ldots,p-2\}$, $(a, p-1)=1$ and $(b, p-1)=1$. Finally, parties compute multiplicative inverses of their numbers: $a^{-1} (\text{mod~}p-1)$ and $b^{-1} (\text{mod~}p-1)$. These also have to remain secret.
 
-The message transport works as follows. A raises the message $m$ to the power $a$ mod $p$ and sends the result to B. B then raises it mod $p$ to $b$, obtaining: \[m^{ab} (\text{mod} p)\text{,}\] and sends it back to A. A raises it mod $p$ to $a^{-1}$, obtaining: \[m^{aba^{-1}}=m^b (\text{mod} p)\text{,}\] and sends it to B. B finally raises it mod $p$ to $b^{-1}$, regaining the original message: \[m^{bb^{-1}}=m (\text{mod} p)\text{.}\]
+The message transport works as follows. \textit{A} raises mod $p$ the message $m$ to the power $a$ and sends the result to \textit{B}. \textit{B} then raises it mod $p$ to $b$, obtaining: \[m^{ab} (\text{mod} p)\text{,}\] and sends it back to \textit{A}. \textit{A} raises it mod $p$ to $a^{-1}$, obtaining: \[m^{aba^{-1}}=m^b (\text{mod} p)\text{,}\] and sends it to \textit{B}. \textit{B} finally raises it mod $p$ to $b^{-1}$, regaining the original message: \[m^{bb^{-1}}=m (\text{mod} p)\text{.}\]
 
-\section{Application Interface}
-An application interface is clear and easy to use. Its usage is presented in figure \ref{fig:interface}.
+\section*{Application Interface}
+The application interface is clear and easy to use. Its usage is presented in figure \ref{fig:interface}.
 
 \begin{figure}[tbhp]
 	\centering
 	\includegraphics[width=1.0\textwidth]{"../graphics/screenshot commented".png}
-	\caption{An application interface (color scheme adapted for printing)}
+	\caption{A basic usage scenario of the application}
 	\label{fig:interface}
 \end{figure}
 
@@ -44,11 +44,11 @@ Next, the user enters the message. After confirmation (by pressing \Enter for ex
 
 \begin{enumerate}
 \item An encoded message: divided into blocks and expressed as integers
-\item An A-encrypted message: raised to the power %a%
-\item An B-encrypted message: raised to the power %b%
-\item An A-decrypted message: raised to the power %a^{-1}%
-\item An B-decrypted message: raised to the power %b^{-1}%
-\item A decoded message: cnverted back into text
+\item An A-encrypted message: raised to the power $a$
+\item An B-encrypted message: raised to the power $b$
+\item An A-decrypted message: raised to the power $a^{-1}$
+\item An B-decrypted message: raised to the power $b^{-1}$
+\item A decoded message: converted back into text
 
 \end{enumerate}
 
