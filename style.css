@@ -47,7 +47,7 @@
     vertical-align: middle;
     display: table-cell;
     width: auto;
-    padding: 0 40;
+    padding: 0 40px;
 }
 
 .centerCellDiv table{
@@ -65,6 +65,6 @@
 }
 
 .centerCellDiv .labelCell{
-    width: 1;
+    width: 1px;
 }
 
