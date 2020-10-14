@@ -1,0 +1,1 @@
+This is a demonstration application for the Massey-Omura cipher.
