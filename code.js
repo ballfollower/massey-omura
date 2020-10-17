@@ -1,9 +1,15 @@
+const PRIME_LENGTH_MIN = 9;
+const PRIME_LENGTH_MAX = 768;
+
 $(function () {
     const BITS_PER_CHAR = 8;
 
-    $('#drawingButton').on('click', function () {
+    $("#pBits").attr("min", PRIME_LENGTH_MIN);
+    $("#pBits").attr("max", PRIME_LENGTH_MAX);
+
+    $('#drawingButton').on('click', function () {        
         clear();
-        
+
         $("#p").val(randomProbablePrime($('#pBits').val()).toString(10));
         p = bigInt($("#p").val());
 
@@ -36,7 +42,7 @@ $(function () {
 /**
  * Clears all the message-related input fields
  */
-function clear(){
+function clear() {
     $(".centerCellDiv input").val("");
 }
 
@@ -48,17 +54,32 @@ function clear(){
  * @param {String} separator The separator to be put between the array elements
  * @returns {String} The string representation
  */
-function writeAllDigitsOfIntegerArray(array, separator=" \u2756 "){
+function writeAllDigitsOfIntegerArray(array, separator = " \u2756 ") {
     var result = "";
-    
+
     for (var i = 0; i < array.length; i++) {
-	if(i>0){
-	    result+=separator;
-	}
-	result+=array[i].toString(10);
+        if (i > 0) {
+            result += separator;
+        }
+        result += array[i].toString(10);
     }
-    
+
     return result;
+}
+
+function checkAndCorrectPrimeLength() {
+    var bits = $("#pBits");
+
+    if (bits.val() < PRIME_LENGTH_MIN) {
+        bits.val(PRIME_LENGTH_MIN);
+
+        alert("Prime size invalid! Adjusted to minimum.");
+    }
+    else if (bits.val() > PRIME_LENGTH_MAX) {
+        bits.val(PRIME_LENGTH_MAX);
+
+        alert("Prime size invalid! Adjusted to maximum.");
+    }
 }
 
 function randomProbablePrime(len) {
@@ -66,11 +87,11 @@ function randomProbablePrime(len) {
     const LOWER_BOUND = bigInt(2).pow(len - 1);
     const UPPER_BOUND = bigInt(2).pow(len).prev();
 
-    const SIEVING_BOUND=500;
+    const SIEVING_BOUND = 500;
 
     do {
         a = bigInt.randBetween(LOWER_BOUND, UPPER_BOUND);
-    } while (divideTentatively(a,SIEVING_BOUND)!=-1 || !a.isProbablePrime());
+    } while (divideTentatively(a, SIEVING_BOUND) != -1 || !a.isProbablePrime());
 
     return a;
 }
@@ -83,11 +104,11 @@ function randomProbablePrime(len) {
  * @returns {Number} A non trivial divisor or -1 if not found
  */
 function divideTentatively(n, bound) {
-    const REASONABLE_BOUND=bigInt.min(n.prev(),bound);
-    
+    const REASONABLE_BOUND = bigInt.min(n.prev(), bound);
+
     var divisors = sieve(REASONABLE_BOUND);
 
-    for (var i=0;i<divisors.length;i++) {
+    for (var i = 0; i < divisors.length; i++) {
         if (n.isDivisibleBy(divisors[i])) {
             return divisors[i];
         }
@@ -103,11 +124,11 @@ function divideTentatively(n, bound) {
  * @returns {Array} Primes found
  */
 function sieve(bound) {
-    var primes=[];
-    var nums = Array.apply(null, Array(bound+1)).map(Boolean.prototype.valueOf,true);
+    var primes = [];
+    var nums = Array.apply(null, Array(bound + 1)).map(Boolean.prototype.valueOf, true);
 
     var i;
-    
+
     for (i = 2; i <= Math.sqrt(bound); i++) {
         if (nums[i]) {
             primes.push(i);
@@ -184,7 +205,7 @@ function encode(text, chars_per_block, bits_per_char) {
     var bitString;
 
     var currentPosition = 0;
-    
+
     // Process whole blocks, without the remainder
     for (var i = 0; i < BLOCKS; i++) {
         bitString = "";
@@ -197,24 +218,24 @@ function encode(text, chars_per_block, bits_per_char) {
     }
 
     const REMAINDER = text.length % chars_per_block;
-    
+
     // Subtracting 1 takes care of the appendix byte
     const CHARACTERS_TO_PAD = chars_per_block - 1 - REMAINDER;
 
     bitString = "";
-    
+
     // Process the remainder
     while (currentPosition < text.length) {
         bitString += charTo8bitString(text[currentPosition++]);
     }
-    
+
     // Add random bytes
     for (var i = 0; i < CHARACTERS_TO_PAD; i++) {
         var randomCharBitstring = bigInt.randBetween(0, 255).toString(2);
 
         bitString += padBitString(randomCharBitstring, bits_per_char);
     }
-    
+
     // Add the appendix
     bitString += padBitString(CHARACTERS_TO_PAD.toString(2), bits_per_char);
 
@@ -238,24 +259,24 @@ function decode(numbers, chars_per_block, bits_per_char) {
     // Process all blocks but the last, which is a special one
     for (var i = 0; i < numbers.length - 1; i++) {
         const NUMBER_BITSTRING = padBitString(numbers[i].toString(2),
-                chars_per_block * bits_per_char);
+            chars_per_block * bits_per_char);
 
         for (var j = 0; j < chars_per_block; j++) {
             const CHAR_BITSTRING = NUMBER_BITSTRING.slice(j * bits_per_char,
-                    (j + 1) * bits_per_char);
+                (j + 1) * bits_per_char);
             output += String.fromCharCode(parseInt(CHAR_BITSTRING, 2));
         }
     }
 
     const LAST_NUMBER_BITSTRING = padBitString(
-            numbers[numbers.length - 1].toString(2), chars_per_block * bits_per_char);
+        numbers[numbers.length - 1].toString(2), chars_per_block * bits_per_char);
     const CHARACTERS_PADDED = parseInt(LAST_NUMBER_BITSTRING.substring(
-            LAST_NUMBER_BITSTRING.length - bits_per_char), 2);
+        LAST_NUMBER_BITSTRING.length - bits_per_char), 2);
 
     // Process the last block
     for (var i = 0; i < chars_per_block - 1 - CHARACTERS_PADDED; i++) {
         const CHAR_BITSTRING = LAST_NUMBER_BITSTRING.slice(i * bits_per_char,
-                (i + 1) * bits_per_char);
+            (i + 1) * bits_per_char);
         output += String.fromCharCode(parseInt(CHAR_BITSTRING, 2));
     }
 
